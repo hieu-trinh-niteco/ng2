@@ -4,8 +4,15 @@ import { Component } from '@angular/core';
   selector: 'my-app',
   template: `
   <h1>Hello {{name}}</h1>
-  <h4>angular component</h4>
-  <my-tutorial></my-tutorial>`,
-  styles: ['h4 {color:blue}']
+  <img [src]="image">
+  <my-tutorial></my-tutorial>
+  <input type="text" [value]="wellcome" />`,
 })
-export class AppComponent  { name = 'Angular'; }
+export class AppComponent  {
+  public name = 'AngularJs';
+
+  //property binding
+  public image = "http://lorempixel.com/300/300"
+
+  public wellcome = "Wellcome to my angular"
+}
