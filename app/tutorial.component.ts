@@ -4,15 +4,13 @@ import {Component} from '@angular/core'
     selector: 'my-tutorial',
     template: `
     <h2>{{ title }}</h2>
-    <input type="text" #name />
-    <button (click)="OnClick($event)">Click Me</button>
+    <input type="text" [(ngModel)]="fname" />
+    <input type="text" [(ngModel)]="lname" />
+    <br/>
+    Fullname: {{ fname }} {{ lname }}
     `
 })
 
 export class TutorialComponent{
     public title = "event binding tutorial"
-
-    OnClick(name:any){
-        console.log(name)
-    }
 }
