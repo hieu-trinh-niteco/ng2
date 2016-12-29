@@ -1,36 +1,28 @@
-import {Component} from '@angular/core'
+import {Component, Input, Output, EventEmitter} from '@angular/core'
 
 @Component({
     selector: 'my-tutorial',
     template: `
     <h2>{{ title }}</h2>
+    <p>Child Component: {{ name }} </p>
 
-    <p [ngClass]="{classOne:cone, classTwo:ctwo}">This ngClass apply style</p>
-    <button (click)="toggle()">Toggle</button>
-    <p [ngStyle]="{'font-style': style, 'font-size': size}">this paragrap will apply to ngStyle</p>
-    `,
-    styles: [
-        `
-            .classOne{
-                color:white;
-            }
-            .classTwo{
-                background-color:black;
-            }
-        `
-    ]
+    <button [disabled]="voted" (click)="vote(true)">Agree</button>
+    <button [disabled]="voted" (click)="vote(false)">Disgree</button>
+    Result: {{ voted }}
+    `
 })
 
 export class TutorialComponent{
-    public title = "directive tutorial"
-    
-    public cone = true;
-    public ctwo = true;
-    public style = "italic";
-    public size = "30px";
+    @Input() name:string;
+    @Output() onVote = new EventEmitter<boolean>();
 
-    toggle(){
-        this.cone = !this.cone
-        this.ctwo = !this.ctwo
+    public voted = false;
+
+    setName(name:string){
+        this.name = name;
+    }
+    vote(agree:boolean){
+        this.voted = true;
+        this.onVote.emit(agree);
     }
 }
