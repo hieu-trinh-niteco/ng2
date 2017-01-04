@@ -1,3 +1,13 @@
 {
-    "typescript.check.workspaceVersion": false
+    "typescript.check.workspaceVersion": false,
+    // exclude .js and .js.map files, when in a TypeScript project
+    "files.exclude": {
+        // include the defaults from VS Code
+        "**/.git": true,
+        "**/.DS_Store": true,
+
+        // exclude .js and .js.map files, when in a TypeScript project
+        "**/*.js": { "when": "$(basename).ts"},
+        "**/*.js.map": true
+    }
 }
