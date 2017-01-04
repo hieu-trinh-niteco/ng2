@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EmployeeListComponent implements OnInit {
     public employees: any[] = [];
     public pages: number[];
-    public currentPage:number;
+    public currentPage: number;
     constructor(
         private employeeService: EmployeeService,
         private router: Router,
@@ -19,16 +19,29 @@ export class EmployeeListComponent implements OnInit {
 
     }
     ngOnInit() {
-        this.activatedRoute.queryParams.subscribe(params=>{
+        this.activatedRoute.queryParams.subscribe(params => {
             this.currentPage = params['page'] || 1;
             console.log(this.currentPage);
         });
+        this.LoadData();
+        this.pages = [1, 2, 3, 4, 5];
+    }
 
-        this.employeeService.GetList().subscribe((response:any)=>{
+    Delete(id: number) {
+        let comfirmResult = confirm("Are you sure to delete employee?");
+        if (comfirmResult) {
+            this.employeeService.Delete(id).subscribe(respone => {
+                alert('Delete Ok');
+                this.LoadData();
+            });
+        }
+    }
+
+    LoadData() {
+        this.employeeService.GetList().subscribe((response: any) => {
             this.employees = response;
-        }, error=>{
+        }, error => {
             console.log(error);
         });
-        this.pages = [1,2,3,4,5];
     }
 }
