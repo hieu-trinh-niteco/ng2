@@ -12,6 +12,10 @@ import { EmployeeDetailComponent } from './employee-detail.component';
 import { NotFoundComponent } from './notfound.component';
 import { EmployeeOverviewComponent } from './employee-overview.component';
 import { EmployeeProjectsComponent } from './employee-projects.component';
+import { LoginComponent } from './login.component';
+import { LoginService } from './services/login.service';
+import { CheckLoginGuard } from './guards/check-login.guard';
+import { CheckSaveFormGuard } from './guards/check-save-form.guard';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpModule, appRoutes],
@@ -19,12 +23,13 @@ import { EmployeeProjectsComponent } from './employee-projects.component';
     AppComponent,
     EmployeeListComponent,
     HomeComponent,
+    LoginComponent,
     EmployeeDetailComponent,
     EmployeeOverviewComponent,
     EmployeeProjectsComponent,
     NotFoundComponent
   ],
-  providers: [EmployeeService],
+  providers: [EmployeeService, LoginService, CheckLoginGuard, CheckSaveFormGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
